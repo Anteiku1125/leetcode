@@ -40,3 +40,16 @@ SELECT score, rank
 FROM RankedScores
 ORDER BY score DESC;
 ```
+## 181
+```sql
+SELECT name AS "Employee" FROM Employee e
+WHERE (e.managerId IS NOT NULL) 
+AND (e.salary > (SELECT salary FROM Employee WHERE Employee.id = e.managerId))
+```
+## 182
+```sql
+SELECT email 
+FROM Person
+GROUP BY email
+HAVING COUNT(email) > 1;
+```
