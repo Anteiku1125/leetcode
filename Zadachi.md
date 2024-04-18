@@ -53,3 +53,31 @@ FROM Person
 GROUP BY email
 HAVING COUNT(email) > 1;
 ```
+
+## 570
+```sql
+SELECT e1.name
+FROM Employee AS e1
+INNER JOIN Employee AS e2
+ON e1.id = e2.managerId
+GROUP BY e2.managerId, e1.name
+HAVING COUNT(e2.managerId) >= 5
+```
+
+## 1045
+```sql
+SELECT customer_id 
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(*) FROM Product)
+```
+
+## 1070
+```sql
+SELECT product_id, year as first_year, quantity, price
+FROM Sales s
+WHERE (product_id, year) IN
+    (SELECT product_id, MIN(year)
+    FROM Sales
+    GROUP BY product_id)
+```
